@@ -1,0 +1,52 @@
+8
+
+dir
+7
+https://jatobasoccerclub.googlecode.com/svn/trunk/src/jsf/fuzzysystem/variable
+https://jatobasoccerclub.googlecode.com/svn
+
+
+
+2009-05-09T03:04:48.531523Z
+3
+elliackin
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+52c3d010-3c29-11de-8227-efdb528b9ea3
+
+FuzzyVariable.java
+file
+9
+
+
+
+2009-05-09T21:57:24.468000Z
+64a59fd0686f14e0ebd44d1fd124d3c4
+2009-05-09T22:00:06.877169Z
+9
+elliackin
+
+VelocityVariable.java
+file
+8
+
+
+
+2009-05-09T03:43:20.218000Z
+f2be2f8b50fcc6682ac9e497745ff705
+2009-05-09T11:22:50.143276Z
+8
+elliackin
+

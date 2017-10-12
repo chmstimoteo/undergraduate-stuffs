@@ -1,0 +1,5 @@
+sequence  :: Monad m => [m a] -> m [a] 
+sequence_ :: Monad m => [m a] -> m () 
+mapM      :: Monad m => (a -> m b) -> [a] -> m [b]
+mapM_     :: Monad m => (a -> m b) -> [a] -> m ()
+(=<<)     :: Monad m => (a -> m b) -> m a -> m b

@@ -1,0 +1,6 @@
+package jsc.fuzzy_system;
+
+public enum Term {
+
+	p
+}

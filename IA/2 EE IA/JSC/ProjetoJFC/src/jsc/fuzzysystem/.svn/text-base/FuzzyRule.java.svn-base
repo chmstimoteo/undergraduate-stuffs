@@ -1,0 +1,37 @@
+package jsc.fuzzy_system;
+
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
+public class RegraFuzzy {
+
+
+	private Hashtable<VariavelLinguistica,Term> map;
+	
+	public void RegraFuzzy(Hashtable<VariavelLinguistica,Term> map) {
+		this.map = map;
+	}
+	
+	
+	public double getAlfa(Hashtable<VariavelLinguistica,Hashtable<Term, Double>> input ){
+		
+		Set<VariavelLinguistica> variaveis = map.keySet();
+		double min = Double.MAX_VALUE;
+		double degree = 0;
+		
+		for (Iterator<VariavelLinguistica> iterator = variaveis.iterator(); iterator.hasNext();) {
+			
+			VariavelLinguistica variavel = iterator.next();
+			Hashtable<Term, Double> terms = input.get(variavel);
+			
+			 degree = terms.get(map.get(variavel));
+			
+			if(degree < min)
+				min = degree;
+		}
+		
+		return degree;
+		
+	}
+}

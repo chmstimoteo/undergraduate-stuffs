@@ -1,0 +1,41 @@
+package jsc.fuzzysystem.membershipfuction;
+
+import jsc.fuzzysystem.util.Point;
+import jsc.fuzzysystem.util.Reta;
+
+
+
+
+public class TriangularMembershipFunction extends ContinuousDomainMembershipFunction{
+
+	private double boundMin;
+	private double boundMax;
+	private Reta retaCres ;
+	private Reta retaDecres;
+	
+	
+	public TriangularMembershipFunction(double boundMin,double center, double boundMax ) {
+		super();
+		this.boundMin = boundMin;
+		this.boundMax = boundMax;
+		this.retaCres = new Reta(new Point(boundMin,0),new Point(center,1));
+		this.retaDecres = new Reta(new Point(center,1),new Point(boundMax,0));
+	}
+
+
+
+
+	public double getMembership(double input) {
+		
+		if(input <= boundMin && input >= boundMax)
+			return 0.0;
+		
+		return Math.min(retaCres.evaluate(input), retaDecres.evaluate(input));
+	
+	}
+	
+	
+	
+	
+
+}

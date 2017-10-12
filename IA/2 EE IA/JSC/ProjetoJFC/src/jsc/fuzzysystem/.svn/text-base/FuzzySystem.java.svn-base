@@ -1,0 +1,18 @@
+package jsc.fuzzysystem;
+
+import java.util.Hashtable;
+import java.util.List;
+
+import jsf.fuzzysystem.variable.FuzzyVariable;
+import jsf.fuzzysystem.variable.fuzzyset.Term;
+
+public interface FuzzySystem {
+
+	
+	public Hashtable<FuzzyVariable, Hashtable<Term, Double>> fuzzyfication();
+	public Hashtable<FuzzyVariable, Hashtable<Term, Double>> inference();
+	public  List<FuzzyOutput> getOutput();
+	public void defuzzyfication(
+			Hashtable<FuzzyVariable, Hashtable<Term, Double>> inputs);
+	
+}

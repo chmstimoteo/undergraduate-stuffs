@@ -1,0 +1,9 @@
+package jsc.fuzzysystem;
+
+import sun.awt.SunHints.Value;
+
+public class Element {
+
+	private Value value;
+	private double pertinence;
+}

@@ -1,0 +1,29 @@
+package jsf.fuzzysystem.variable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jsf.fuzzysystem.membershipfuction.TriangularMembershipFunction;
+import jsf.fuzzysystem.variable.fuzzyset.FuzzySet;
+import jsf.fuzzysystem.variable.fuzzyset.Term;
+
+
+
+public class VelocityVariable extends FuzzyVariable{
+
+	
+
+	@Override
+	public void buildFuzzyVariable() {
+		
+		FuzzySet high = new FuzzySet(Term.HIGH,new TriangularMembershipFunction(0,0,0));
+		FuzzySet mean = new FuzzySet(Term.MEAN,new TriangularMembershipFunction(0,0,0));
+		FuzzySet low = new FuzzySet(Term.LOW,new TriangularMembershipFunction(0,0,0));
+		List<FuzzySet> sets = new ArrayList<FuzzySet>();
+		sets.add(high);
+		sets.add(mean);
+		sets.add(low);
+		this.setFuzzySets(sets);
+	}
+
+}

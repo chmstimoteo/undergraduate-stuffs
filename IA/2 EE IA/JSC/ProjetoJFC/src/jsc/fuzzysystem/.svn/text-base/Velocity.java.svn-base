@@ -1,0 +1,5 @@
+package jsc.fuzzy_system;
+
+public class VelocidadeMuitoAlta extends SetFuzzy{
+
+}

@@ -1,0 +1,84 @@
+Teste 2:
+ 
+
+import Graphics.UI.WX
+main = start test
+etest = do
+        main <- frame [text := "Teste de Texto" , size := Size 150 100]
+        e1 <- textEntry  main [position := Point 50 20 ]
+ 
+      set e1 [on command:= do 
+    t <- get e1 text
+    print t
+    ]
+        return ()
+ 
+test = do
+        main <- frame [text := "Teste de Texto" , size := Size 150 100]
+        c1 <- singleListBox main [items := ["o1","o2","o3"]]
+   set c1 [ on select := do 
+     pos <- get c1 selection
+    v <- get c1 (item pos)
+    putStr "Selecionado "
+    print v
+                ]
+ time  <- timer main [interval := 1, on command := putStr "oi" ] 
+   return () 
+ 
+     
+
+    Teste:
+module Main where
+import Graphics.UI.WX
+import Graphics.UI.WX.Window
+main = start teste
+teste=do
+        p <- varCreate 1.0
+ w <- frame [ text := "teste", on click := (    \p -> do
+            putStr "Apertou o Frame"
+        print p
+        return ()
+       ),
+         on paint := (\dc rect -> do
+       drawText dc "Texto" (Point 100 100) []
+       circle dc (Point 400 200) 100 []
+                            line dc (Point 400 200) (Point 400 100) []
+       c <- varGet p
+       line dc (Point 400 200) (Point (round (100*(sin (c))+400)) (round (100*(cos (c))+200))) []    
+                          )   
+       ]
+          
+ b <- button w [ text := "press me" ]
+         --set b [ on command := layoutDemo,size := Size 100 200 ]
+          
+ set b [on drag := (\(Point x1 y1) -> do
+                                               Point x2 y2 <- get b position
+                   set b [position := Point (x1+x2) (y1+y2)]
+                   return () 
+    ), size := Size 100 200   
+         ] 
+ time  <- timer w [interval := 10,on command := do 
+        varUpdate p (\x->x-0.125)
+        repaint w  
+       ] 
+        return ()
+ 
+ 
+
+layoutDemo = do 
+  f <- frame [text := "Layout demo"]
+                p <-panel f [ ]
+   x <-entry p [text := "100"]
+   y <-entry p [text := "100"]
+   ok <- button p [text := "Ok"]
+   can<- button p [text := "Cancel"]
+    set x [on command := print "Hello"]
+                set ok [ on command := close f ]
+  set can [ on command := close f ]
+                set p [ layout := floatCenter $
+                                  column 5 [ widget x, widget y, row 5 [ widget ok, widget can ] ]
+       ]
+  --set f [ on closing := print "VTC"]
+  --close f
+  return ()
+

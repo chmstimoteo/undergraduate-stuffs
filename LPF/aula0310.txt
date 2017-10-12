@@ -1,0 +1,56 @@
+class C1 a where
+  f::a->Int
+  val::a
+
+data Par = Par Int Int
+
+instance C1 Par where
+  f (Par x y) = x+y
+  val = Par 0 0
+
+--  :t f ???
+--  C1 a => a->Int
+
+instance C1 Bool where
+  f False = 0
+  f True = 1
+  val = False
+
+instance C1 String where
+  f [] = 0
+  f (h:t) = 1 + (f t)
+  val = "carlos"
+ 
+(%)::Int->Int->Float
+a % b = (sqrt a)*b
+
+data PPar a = PPar a a
+
+instance C1 (PPar a) where
+  f (PPar x y) = 2
+  val = PPar val val
+
+instance C1 (PPar Int) where
+  f (PPar x y) = x+y
+  val = PPar 1 1
+
+instance C1 a=> C1(PPar a) where
+  f (PPar x y) = (f x)+(f y)
+  val = PPar val val
+f (PPar True False) = 1
+f (PPar (Par 1 2) (Par 2 3)) = 8
+
+instance C1 a => C1 [a] where
+  f [] = 0
+  f (a:b) = (f a)+(f b)
+  val = [val, val]
+
+g x = (f x)+1
+g:: C1 a => a->Int
+
+f ([True,False,False]) = 1
+f ([(Par 1 2),(Par 2 3)]) = 8
+g [[True,False],[True]] = 2
+   [[Bool]]::C1
+    [Bool]::C1
+     Bool::C1

@@ -1,0 +1,35 @@
+package jsc.fuzzy_system;
+
+public class TrianguloFunction extends ContinuosPertinenceFuntion{
+
+	private double boundInferior;
+	private double boundSuperior;
+	private Reta retaCres ;
+	private Reta retaDecres;
+	
+	
+	public TrianguloFunction(double boundInferior, double boundSuperior, double center) {
+		super();
+		this.boundInferior = boundInferior;
+		this.boundSuperior = boundSuperior;
+		this.retaCres = new Reta(new Point(boundInferior,0),new Point(center,1));
+		this.retaDecres = new Reta(new Point(center,1),new Point(boundSuperior,0));
+	}
+
+
+
+
+	public double getDereePertinece(double input) {
+		
+		if(input < boundInferior && input > boundSuperior)
+			return 0.0;
+		
+		return Math.min(retaCres.evaluate(input), retaDecres.evaluate(input));
+	
+	}
+	
+	
+	
+	
+
+}

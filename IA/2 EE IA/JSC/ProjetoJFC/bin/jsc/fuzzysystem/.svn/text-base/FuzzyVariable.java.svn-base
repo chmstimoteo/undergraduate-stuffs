@@ -1,0 +1,18 @@
+package jsc.fuzzy_system;
+
+import java.util.Hashtable;
+import java.util.List;
+
+
+public abstract class VariavelLinguistica {
+
+	Hashtable<Term, SetFuzzy> terms;
+	
+	public VariavelLinguistica() {
+	
+	}
+	
+	public Hashtable<Term, Double> degreesPertinence(double input) {
+		return null;
+	}
+}

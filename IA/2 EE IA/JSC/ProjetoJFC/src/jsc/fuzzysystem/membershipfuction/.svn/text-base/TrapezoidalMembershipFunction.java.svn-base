@@ -1,0 +1,42 @@
+package jsc.fuzzysystem.membershipfuction;
+
+import jsc.fuzzysystem.util.Point;
+import jsc.fuzzysystem.util.Reta;
+
+
+
+public class TrapezoidalMembershipFunction extends ContinuousDomainMembershipFunction{
+
+	
+	private double boundMin;
+	private double boundMax;
+	private double center1;
+	private double center2;
+	private Reta retaCres ;
+	private Reta retaDecres;
+	
+	public TrapezoidalMembershipFunction(double boundMin, double center1, double center2, double boundMax) {
+		super();
+		this.center1 = center1;
+		 this.center2 = center2;
+		this.retaCres = new Reta(new Point(boundMin,0.0),new Point(center1,1.0));
+		this.retaDecres = new Reta(new Point(center2,1.0),new Point(boundMax,0.0));
+		// TODO Auto-generated constructor stub
+	}
+
+	public double getMembership(double input) {
+		
+		if(input <= boundMin && input >= boundMax)
+			return 0.0;
+		
+		if(input >= center1 && input <= center2 )
+			return 1.0;
+		return Math.min(retaCres.evaluate(input), retaDecres.evaluate(input));
+	
+	}
+	
+
+
+	
+
+}

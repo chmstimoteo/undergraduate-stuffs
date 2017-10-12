@@ -1,0 +1,156 @@
+A função time oferece um nível mais preciso de contagem de tempo.
+Pode parecer estranho inicialmente, porque ela devolve os segundos passados desde meia-noite de 1 de Janeiro de 1970. Haverá bug na versão 32 bits a partir de 19:14:07 de 18 de Janeiro, 2038. Sem problemas. Para exemplificar o uso dele como simples contador em um intervalo t2-t1 de tempo, eu fiz um programinha. 
+Note que declara-se duas variáveis sem definir diretamente o tipo. Usamos time_t para definir um tipo pré-definido em time.h, para a função específica time. Note também o uso do operador de endereço &. Há um aparente overflow (%100) após 99 horas, por causa da formatação de dois espaços para a impressão (%02f). 
+#include <stdio.h>
+#include <time.h>
+main() {
+ time_t ltime2;
+ time_t ltime1;
+
+ time(&ltime1);
+
+ for(;;) {
+  time(&ltime2);
+  printf("%02d:", ((ltime2-ltime1) / 3600) % 100);
+  printf("%02d:", ((ltime2-ltime1) / 60) % 60);
+  printf("%02d\r", (ltime2-ltime1) % 60);
+ }
+
+
+
+
+Run-Time Library Reference   
+
+time, _time64
+Get the system time.
+
+time_t time(
+   time_t *timer 
+);
+__time64_t _time64(
+   __time64_t *timer 
+);
+Parameters
+timer 
+Pointer to the storage location for time. 
+Return Value
+Return the time in elapsed seconds. There is no error return. 
+
+A call to time or _time64 can fail, however, if the date passed to the function is: 
+
+Before midnight, January 1, 1970. 
+After 19:14:07, January 18, 2038, UTC (using time and time_t). 
+After 23:59:59, December 31, 3000, UTC (using _time64 and __time64_t). 
+Remarks
+The time function returns the number of seconds elapsed since midnight (00:00:00), January 1, 1970, coordinated universal time (UTC), according to the system clock. The return value is stored in the location given by timer. This parameter may be NULL, in which case the return value is not stored.
+
+Requirements
+Routine Required header Compatibility 
+time <time.h> ANSI, Win 98, Win Me, Win NT, Win 2000, Win XP 
+_time64 <time.h> Win 98, Win Me, Win NT, Win 2000, Win XP 
+
+For additional compatibility information, see Compatibility in the Introduction.
+
+Libraries
+
+All versions of the C run-time libraries.
+
+Example
+// crt_times.c
+/* This program demonstrates these time and date functions:
+ *      _time64         _ftime64        _ctime64     asctime
+ *      _localtime64    _gmtime64       _mktime64    _tzset
+ *      _strtime        _strdate        strftime
+ *
+ * Also the global variable:
+ *      _tzname
+ */
+
+#include <time.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/timeb.h>
+#include <string.h>
+
+int main()
+{
+    char tmpbuf[128], ampm[] = "AM";
+    __time64_t ltime;
+    struct __timeb64 tstruct;
+    struct tm *today, *gmt, xmas = { 0, 0, 12, 25, 11, 93 };
+
+    /* Set time zone from TZ environment variable. If TZ is not set,
+     * the operating system is queried to obtain the default value 
+     * for the variable. 
+     */
+    _tzset();
+
+    /* Display operating system-style date and time. */
+    _strtime( tmpbuf );
+    printf( "OS time:\t\t\t\t%s\n", tmpbuf );
+    _strdate( tmpbuf );
+    printf( "OS date:\t\t\t\t%s\n", tmpbuf );
+
+    /* Get UNIX-style time and display as number and string. */
+    _time64( &ltime );
+    printf( "Time in seconds since UTC 1/1/70:\t%ld\n", ltime );
+    printf( "UNIX time and date:\t\t\t%s", _ctime64( &ltime ) );
+
+    /* Display UTC. */
+    gmt = _gmtime64( &ltime );
+    printf( "Coordinated universal time:\t\t%s", asctime( gmt ) );
+
+    /* Convert to time structure and adjust for PM if necessary. */
+    today = _localtime64( &ltime );
+    if( today->tm_hour >= 12 )
+    {
+   strcpy( ampm, "PM" );
+   today->tm_hour -= 12;
+    }
+    if( today->tm_hour == 0 )  /* Adjust if midnight hour. */
+   today->tm_hour = 12;
+
+    /* Note how pointer addition is used to skip the first 11 
+     * characters and printf is used to trim off terminating 
+     * characters.
+     */
+    printf( "12-hour time:\t\t\t\t%.8s %s\n",
+       asctime( today ) + 11, ampm );
+
+    /* Print additional time information. */
+    _ftime64( &tstruct );
+    printf( "Plus milliseconds:\t\t\t%u\n", tstruct.millitm );
+    printf( "Zone difference in hours from UTC:\t%u\n", 
+             tstruct.timezone/60 );
+    printf( "Time zone name:\t\t\t\t%s\n", _tzname[0] );
+    printf( "Daylight savings:\t\t\t%s\n", 
+             tstruct.dstflag ? "YES" : "NO" );
+
+    /* Make time for noon on Christmas, 1993. */
+    if( _mktime64( &xmas ) != (__time64_t)-1 )
+   printf( "Christmas\t\t\t\t%s\n", asctime( &xmas ) );
+
+    /* Use time structure to build a customized time string. */
+    today = _localtime64( &ltime );
+
+    /* Use strftime to build a customized time string. */
+    strftime( tmpbuf, 128,
+         "Today is %A, day %d of %B in the year %Y.\n", today );
+    printf( tmpbuf );
+}
+Sample Output
+OS time:                                14:15:49
+OS date:                                02/07/02
+Time in seconds since UTC 1/1/70:       1013120149
+UNIX time and date:                     Thu Feb 07 14:15:49 2002
+Coordinated universal time:             Thu Feb 07 22:15:49 2002
+12-hour time:                           02:15:49 PM
+Plus milliseconds:                      455
+Zone difference in hours from UTC:      8
+Time zone name:                         Pacific Standard Time
+Daylight savings:                       NO
+Christmas                               Sat Dec 25 12:00:00 1993
+
+Today is Thursday, day 07 of February in the year 2002.
+
+

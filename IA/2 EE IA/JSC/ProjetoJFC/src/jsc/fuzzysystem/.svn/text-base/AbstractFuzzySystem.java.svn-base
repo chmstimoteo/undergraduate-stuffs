@@ -1,0 +1,112 @@
+package jsc.fuzzysystem;
+
+import java.util.Hashtable;
+import java.util.List;
+
+import jsc.fuzzysystem.inferencing.FuzzyInferencingSrategy;
+import jsf.fuzzysystem.defuzzyficationstrategy.DefuzzyficationStrategy;
+import jsf.fuzzysystem.fuzzyrules.FuzzyRuleBase;
+import jsf.fuzzysystem.variable.FuzzyVariable;
+import jsf.fuzzysystem.variable.fuzzyset.FuzzySet;
+import jsf.fuzzysystem.variable.fuzzyset.Term;
+
+public abstract class AbstractFuzzySystem implements FuzzySystem{
+
+	private FuzzyRuleBase base;
+	private List<FuzzyVariable> variaveis;
+	private FuzzyInferencingSrategy inferenceStrategy;
+	private List<FuzzyInput> inputs;
+	private List<FuzzyOutput> outputs;
+	private DefuzzyficationStrategy defuzzyficationStrategy;
+	
+	
+	
+	
+	
+
+
+	public AbstractFuzzySystem(FuzzyRuleBase base,
+			List<FuzzyVariable> variaveis,
+			FuzzyInferencingSrategy inferenceStrategy, List<FuzzyInput> inputs,
+			DefuzzyficationStrategy defuzzyficationStrategy) {
+		super();
+		this.base = base;
+		this.variaveis = variaveis;
+		this.inferenceStrategy = inferenceStrategy;
+		this.inputs = inputs;
+		this.defuzzyficationStrategy = defuzzyficationStrategy;
+	}
+
+	@Override
+	public void defuzzyfication(Hashtable<FuzzyVariable, Hashtable<Term, Double>> inputs) {
+		
+		this.outputs =  defuzzyficationStrategy.defuzzyfication(inputs);
+	}
+
+	@Override
+	public Hashtable<FuzzyVariable, Hashtable<Term, Double>> fuzzyfication() {
+		
+		Hashtable<FuzzyVariable, Hashtable<Term, Double>> degrees
+		 = new Hashtable<FuzzyVariable, Hashtable<Term,Double>>();
+		
+		Hashtable<Term, Double> mapTermValue;
+		FuzzyVariable v;
+		double value;
+		
+		int i = 0;
+		for(FuzzyInput input : inputs){
+			
+			mapTermValue = new Hashtable<Term, Double>();
+			value = input.getVariavelLiguitica(variaveis.get(i));
+			List<FuzzySet> setFuzzys= this.variaveis.get(i).getFuzzySets();
+			
+			for(FuzzySet setFuzzy : setFuzzys){
+				mapTermValue.put(setFuzzy.getTerm(),setFuzzy.getFunction().getMembership(value));
+			}
+			
+			degrees.put(this.variaveis.get(i), mapTermValue);
+			i++;
+		}
+		
+		return degrees;
+	}
+
+	@Override
+	public List<FuzzyOutput> getOutput() {
+		
+		return this.outputs;
+	}
+
+	@Override
+	public Hashtable<FuzzyVariable, Hashtable<Term, Double>> inference() {
+		
+		return this.inferenceStrategy.inference(this.base);
+	}
+
+	public FuzzyRuleBase getBase() {
+		return base;
+	}
+
+	public void setBase(FuzzyRuleBase base) {
+		this.base = base;
+	}
+
+	public List<FuzzyVariable> getVariaveis() {
+		return variaveis;
+	}
+
+	public void setVariaveis(List<FuzzyVariable> variaveis) {
+		this.variaveis = variaveis;
+	}
+
+	public FuzzyInferencingSrategy getInferenceStrategy() {
+		return inferenceStrategy;
+	}
+
+	public void setInferenceStrategy(FuzzyInferencingSrategy inferenceStrategy) {
+		this.inferenceStrategy = inferenceStrategy;
+	}
+
+	
+
+}

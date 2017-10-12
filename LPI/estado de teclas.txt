@@ -1,0 +1,11 @@
+Essa dica é "Windows only". Como a função Beep, a GetAsyncKeyState está implementada na API do windows. Porém, ao contrário de Beep, a segunda é útil e muito interessante. Todo mundo já sabe como se lê caracteres e números usando funções do ANSI. Porém, para ler o estado das teclas (pressionadas ou não) existe GetAsyncKeyState. 
+ 
+A definição encontra-se em: http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/userinput/keyboardinput/keyboardinputreference/keyboardinputfunctions/getasynckeystate.asp
+Deve-se consultar uma tabela com o código individual para cada tecla em: http://msdn.microsoft.com/library/en-us/winui/winui/WindowsUserInterface/UserInput/VirtualKeyCodes.asp 
+ 
+A função recebe um argumento (endereço da tecla) e devolve seu estado. Ela retorna um valor entre 3 valores definidos. Um deles é 0, caso da tecla não pressionada. Por exemplo, o endereço da "barra de espaço" é 20 em hexa. A notação em C de números hexa é precedida de 0x. Abaixo segue um instrução que atribui um valor dependente do estado da "barra de espaço" para a variável x: 
+ 
+x = GetAsyncKeyState(0x20);
+/* x recebe valor 0, se barra de espaço está "não pressionada */
+ 
+A instrução acima é executada pela cpu em intervalos curtíssimos de tempo, logo não faz sentido uma chamada a função GetAsyncKeyState sem o uso de laços que a repita numa taxa de várias vezes por segundo, pelo tempo que for necessário ao propósito do programa. 

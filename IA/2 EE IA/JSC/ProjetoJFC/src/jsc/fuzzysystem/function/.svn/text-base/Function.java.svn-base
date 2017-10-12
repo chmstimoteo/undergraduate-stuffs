@@ -1,0 +1,7 @@
+package jsc.fuzzysystem.util;
+
+public interface Function {
+
+	public double evaluate(double input);
+	
+}

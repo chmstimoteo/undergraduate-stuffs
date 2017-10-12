@@ -1,0 +1,8 @@
+package jsc.fuzzy_system;
+
+import java.util.List;
+
+public class BaseRegras {
+
+	List<RegraFuzzy> regras;
+}

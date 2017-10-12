@@ -1,0 +1,14 @@
+package jsf.fuzzysystem.membershipfuction;
+
+
+public class ContinuosMembershipFunction implements MembershipFunction{
+
+	
+
+	@Override
+	public double getMembership(double value) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

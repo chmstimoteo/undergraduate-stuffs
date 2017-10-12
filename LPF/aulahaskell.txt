@@ -1,0 +1,9 @@
+EXERCISE:
+
+*DEFINA uma estrutura(s) para representar a vida escolar de um aluno.
+*Defina uam funcao que classifique um aluno como sendo:
+ (a):: Passou por media em todas as disciplinas.
+ (b):: Fez algum provas final mas nunca reprovou. 
+ (c):: Índice de reprovacao menor que 20%.
+ (d):: O resto..............
+

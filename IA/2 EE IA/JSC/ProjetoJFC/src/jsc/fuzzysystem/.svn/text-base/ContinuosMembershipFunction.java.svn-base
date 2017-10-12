@@ -1,0 +1,10 @@
+package jsc.fuzzy_system;
+
+public class ContinuosPertinenceFuntion implements Function{
+
+	public double evaluate(double input) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

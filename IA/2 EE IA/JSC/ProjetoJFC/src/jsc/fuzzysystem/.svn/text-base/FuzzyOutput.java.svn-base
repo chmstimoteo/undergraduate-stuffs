@@ -1,0 +1,19 @@
+package jsc.fuzzysystem;
+
+import java.util.Hashtable;
+
+import jsf.fuzzysystem.variable.FuzzyVariable;
+
+public class FuzzyOutput {
+
+	private Hashtable<FuzzyVariable, Double> fuzzyOutput;
+
+	public FuzzyOutput(Hashtable<FuzzyVariable, Double> fuzzyOutput) {
+		super();
+		this.fuzzyOutput = fuzzyOutput;
+	}
+
+	public Double getVariavelLiguitica(FuzzyVariable variavelLinguistica) {
+		return fuzzyOutput.get(variavelLinguistica);
+	}
+}

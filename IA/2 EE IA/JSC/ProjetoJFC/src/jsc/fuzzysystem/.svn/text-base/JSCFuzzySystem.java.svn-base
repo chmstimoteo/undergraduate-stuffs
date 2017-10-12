@@ -1,0 +1,20 @@
+package jsc.fuzzysystem;
+
+import java.util.List;
+
+import jsc.fuzzysystem.inferencing.FuzzyInferencingSrategy;
+import jsf.fuzzysystem.defuzzyficationstrategy.ClippedCenterGravityDefuzzyficationStrategy;
+import jsf.fuzzysystem.fuzzyrules.FuzzyRuleBase;
+import jsf.fuzzysystem.variable.FuzzyVariable;
+
+public class JSCFuzzySystem extends AbstractFuzzySystem{
+
+	public JSCFuzzySystem(FuzzyRuleBase base, List<FuzzyVariable> variaveis,
+			FuzzyInferencingSrategy inferenceStrategy, List<FuzzyInput> inputs) {
+		
+		super(base, variaveis, inferenceStrategy, inputs, new ClippedCenterGravityDefuzzyficationStrategy());
+		// TODO Auto-generated constructor stub
+	}
+
+	
+}

@@ -1,0 +1,34 @@
+data MEstado a =  MEstado(Int->(a,Int))
+instance Monad MEstado where
+   return n = MEstado(\v ->(n,v))
+   (MEstado x) >>= f = MEstado(\v->let
+                                      (n,v1)= x v
+                       MEstado x2 = f n 
+                     in
+                    x2 v1)
+
+returnVal = MEstado(\v->(v,v))
+
+setVal n = MEstado(\v->(n,n))
+
+run(MEstado m) = m 0
+inc = returnVal >>= (\x->setVal (x+1)) 
+incp = returnVal >>=(\x->((setVal (x+1))>>return x))
+
+somaDado = inc >>= (\a->incp >>= (\b->return (a + b)) )
+
+somaDado2 = do
+             a <-inc
+          b <-incp 
+         return (a+b)
+
+menorQue x = do
+         n<-returnVal
+         return (x<n)
+
+enquanto cond com = do
+                     t<-cond
+        	     if t then 
+	            com >>(enquanto cond com) 
+             		else
+            		return ()  

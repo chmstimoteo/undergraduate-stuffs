@@ -1,0 +1,1 @@
+data Boll = True | False deriving (Show,Eq,Enum)

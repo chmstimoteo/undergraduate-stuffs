@@ -1,0 +1,11 @@
+Se agnt vai transformar o codigo OO em OA, como que agnt vai provar que 
+o projeto transformado é equivalente ao inicial.
+
+
+
+Primeiramente, eu vou pegar o código OO e
+fazer a analise usando o MCI(Method Call Inteception)
+e uma árvore de avaliacao desse código para
+prosseguir na implantacao do framework e 
+depois usar as métricas para mostrar os
+resultados delas. 

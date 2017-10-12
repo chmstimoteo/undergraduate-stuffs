@@ -1,0 +1,19 @@
+package jsc.fuzzysystem.util;
+
+
+
+public class Reta implements Function{
+
+
+	private double m;
+	private double b;
+	public Reta(Point p0,Point p1) {
+		this.m = (p1.getY()-p0.getY())/(p1.getX()-p0.getX());
+		this.b = (p0.getY()-(this.m*p0.getX()));
+	}
+	
+	public double evaluate(double x) {
+		return this.m * x + this.b;
+	}
+
+}

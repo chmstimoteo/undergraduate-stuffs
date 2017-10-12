@@ -1,0 +1,17 @@
+Roteiro:
+
+1-o que é vida?
+
+1.1-histórico do conceito de vida
+1.2-vida no contexto biológico
+
+2-Vida Artificial
+2.1-definição de alife
+2.2-tipos de alifes
+2.3-hard alife
+2.4-soft alife
+2.5-theory alife
+
+3-Transumanismo
+
+4-Conclusão

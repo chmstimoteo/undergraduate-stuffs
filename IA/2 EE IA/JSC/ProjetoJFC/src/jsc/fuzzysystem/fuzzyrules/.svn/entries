@@ -1,0 +1,42 @@
+8
+
+dir
+0
+https://jatobasoccerclub.googlecode.com/svn/trunk/src/jsf/fuzzy_system/fuzzyrules
+https://jatobasoccerclub.googlecode.com/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+52c3d010-3c29-11de-8227-efdb528b9ea3
+
+FuzzyRule.java
+file
+
+
+
+add
+
+FuzzyRuleBase.java
+file
+
+
+
+add
+

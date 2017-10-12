@@ -1,0 +1,52 @@
+package jsc.fuzzysystem.membershipfuction;
+
+import java.util.List;
+
+import jsc.fuzzysystem.util.Domain;
+import jsc.fuzzysystem.util.Function;
+import jsc.fuzzysystem.util.Point;
+
+
+public class ContinuousDomainMembershipFunction implements MembershipFunction{
+
+	
+
+	@Override
+	public double getMembership(double value) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+
+	@Override
+	public double evaluate(double input) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double integralReta(double x0, double xf) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double integralProdutoX(double x0, double xf) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Domain getDomain() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Point> intersection(Function function) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

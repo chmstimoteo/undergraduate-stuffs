@@ -1,0 +1,125 @@
+From: <Salvo pelo Microsoft Internet Explorer 7>
+Subject: 
+Date: Mon, 12 Nov 2007 20:42:43 -0300
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://f1.grp.yahoofs.com/v1/8No4R14Mq5dOzjKv1Tq5ykHkZCoXZbe6Lyh1aCMQU5cnmHYfgtaRhVCBCRH2hdYRXFqrnnLp-sk5fbrtjC_xkjkdUTHj8f0tNv1FDw/Turmas%20Antigas/ExemploModulos/IConta.hs
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.6000.16544" name=3DGENERATOR></HEAD>
+<BODY><PRE>import Conta
+import BDConta
+import Graphics.UI.WX
+
+main :: IO ()
+main =3D start gui
+
+gui =3D do
+
+   f &lt;- frame []
+
+   labelNumero	&lt;- staticText f [text :=3D "Numero", clientSize :=3D =
+sz 100 20]
+   labelValor	&lt;- staticText f [text :=3D "Valor", clientSize :=3D sz =
+100 20]
+   info         &lt;- staticText f [text :=3D "", clientSize :=3D sz 100 =
+20]
+
+   textNumero	&lt;- textEntry f [size :=3D sz 100 20]
+   textValor	&lt;- textEntry f [size :=3D sz 100 20]
+
+   b_cadastrar	&lt;- button f [text :=3D "cadastrar"]
+   b_remover	&lt;- button f [text :=3D "remover"]
+   b_creditar	&lt;- button f [text :=3D "creditar"]
+   b_debitar	&lt;- button f [text :=3D "debitar"]
+   b_saldo	&lt;- button f [text :=3D "saldo"]
+
+   set b_cadastrar	[on command :=3D i_cadastrar =
+(textNumero,textValor,info)]
+   set b_remover	[on command :=3D i_remover (textNumero,info)]
+   set b_creditar	[on command :=3D i_creditar =
+(textNumero,textValor,info)]
+   set b_debitar	[on command :=3D i_debitar (textNumero,textValor,info)]
+   set b_saldo          [on command :=3D i_saldo (textNumero,info)]
+
+   set f [
+      text :=3D "Banco Haskell",=20
+      layout :=3D margin 5 $ column 5 [
+          hfill (row 5 [
+             (grid 5 5 [=20
+                [widget labelNumero, widget labelValor],
+                [widget textNumero, widget textValor]
+             ]),=09
+             floatCenter $ (grid 5 5 [=20
+                [widget info]
+             ])
+	  ]),
+          fill (row 5 [widget b_cadastrar, widget b_remover, widget =
+b_creditar, widget b_debitar, widget b_saldo])
+      ]]
+
+-- ## FUNCOES PRINCIPAIS (INTERFACE)
+
+-- i_cadastrar
+-- i_remover
+-- i_creditar
+-- i_debitar
+-- i_saldo
+
+i_cadastrar :: (TextCtrl (), TextCtrl (), StaticText ()) -&gt; IO ()
+i_cadastrar (numero,valor,info) =3D do
+   n &lt;- get numero text
+   v &lt;- get valor text
+   if (not (existe n))=20
+      then do { inserir (criarConta n (read v));=20
+                set info [text :=3D "opera=E7=E3o concluida"]; }
+      else do { set info [text :=3D "cliente ja existe"]; }
+   cleanTextCtrl [numero, valor]
+
+i_remover :: (TextCtrl (), StaticText ()) -&gt; IO ()
+i_remover (numero,info) =3D do
+   n &lt;- get numero text
+   if (existe n)
+      then do { remover n;=20
+                set info [text :=3D "opera=E7=E3o concluida"]; }
+      else do { set info [text :=3D "cliente nao existe"]; }
+   cleanTextCtrl [numero]
+
+i_creditar :: (TextCtrl (), TextCtrl (), StaticText ()) -&gt; IO ()
+i_creditar (numero,valor,info) =3D do
+   n &lt;- get numero text
+   v &lt;- get valor text
+   if (existe n)
+      then do { atualizar (creditar (procurar n) (read v));=20
+                set info [text :=3D "opera=E7=E3o concluida"]; }
+      else do { set info [text :=3D "cliente nao existe"]; }
+   cleanTextCtrl [numero, valor]
+
+i_debitar :: (TextCtrl (), TextCtrl (), StaticText ()) -&gt; IO ()
+i_debitar (numero,valor,info) =3D do
+   n &lt;- get numero text
+   v &lt;- get valor text
+   if (existe n)
+      then do { atualizar (debitar (procurar n) (read v));=20
+                set info [text :=3D "opera=E7=E3o concluida"]; }
+      else do { set info [text :=3D "cliente nao existe"]; }
+   cleanTextCtrl [numero, valor]
+
+i_saldo :: (TextCtrl (), StaticText ()) -&gt; IO ()
+i_saldo (numero,info) =3D do
+   n &lt;- get numero text
+   if (existe n)
+      then do { set info [text :=3D show (getSaldo (procurar n))]; }
+      else do { set info [text :=3D "cliente nao existe"]; }
+   cleanTextCtrl [numero]
+
+cleanTextCtrl :: [TextCtrl ()] -&gt; IO ()
+cleanTextCtrl ts =3D mapM_ (\t -&gt; set t [text :=3D ""]) ts
+
+</PRE></BODY></HTML>

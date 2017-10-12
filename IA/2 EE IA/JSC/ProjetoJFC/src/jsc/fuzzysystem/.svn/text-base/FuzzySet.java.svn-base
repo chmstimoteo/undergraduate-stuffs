@@ -1,0 +1,10 @@
+package jsc.fuzzy_system;
+
+public abstract class SetFuzzy {
+
+	private PertinenceFunction function;
+	private Term term;
+	
+	
+
+}

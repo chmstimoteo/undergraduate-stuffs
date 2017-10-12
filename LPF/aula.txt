@@ -1,0 +1,24 @@
+data Infarv a = Infarv a [(Infarv a)..] deriving Show
+
+
+data Tree a = Tree a [Tree a] deriving Show
+
+
+folhas (Tree a b) = (aux a b)
+		
+			where
+
+			aux a [] = [a]
+
+			aux a (x:xs) = folhas (x) ++ aux (head xs) (tail xs)
+
+
+prefixar (Tree a b) = aux a b
+
+		where
+
+			aux a [] = [a]
+
+			aux a (x:xs) = [a] ++ prefixar (x) ++ aux (head xs) (tail xs)
+ 
+

@@ -1,0 +1,10 @@
+package jsc.fuzzysystem.membershipfuction;
+
+import jsc.fuzzysystem.util.Function;
+
+public interface MembershipFunction extends Function{
+
+	public double getMembership(double value);
+	
+	
+}

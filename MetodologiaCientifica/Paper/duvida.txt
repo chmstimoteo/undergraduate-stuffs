@@ -1,0 +1,9 @@
+Que garantia teremos que os resulados do
+experimento baseado no objeto de analise, 
+seja válido para qualquer objeto(código Java)
+analisado?
+
+VAlidade interna, validade de construção
+e Validade externa.
+
+Tipo de experimentação: EXPERIMENTO

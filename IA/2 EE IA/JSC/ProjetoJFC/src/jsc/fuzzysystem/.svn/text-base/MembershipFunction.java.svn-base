@@ -1,0 +1,6 @@
+package jsc.fuzzy_system;
+
+public interface PertinenceFunction {
+
+	public double getDereePertinece();
+}

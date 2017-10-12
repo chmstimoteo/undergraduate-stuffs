@@ -1,0 +1,76 @@
+!SESSION 2010-11-07 22:07:12.360 -----------------------------------------------
+eclipse.buildId=I20100608-0911
+java.version=1.6.0_20
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.922
+!MESSAGE NLS missing message: errorInternalCactus in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.932
+!MESSAGE NLS missing message: LaunchTestAction_message_selectConfiguration in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.932
+!MESSAGE NLS missing message: LaunchTestAction_message_selectDebugConfiguration in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.942
+!MESSAGE NLS missing message: LaunchTestAction_message_selectRunConfiguration in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.942
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WindowTitle in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.942
+!MESSAGE NLS missing message: NewServletTestCaseWizard_ErrorMessageTitleMissingLibrary in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.952
+!MESSAGE NLS missing message: NewServletTestCaseWizard_ErrorMessageMissingLibrary in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.952
+!MESSAGE NLS missing message: NewServletTestCaseWizard_ErrorTitleNew in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.962
+!MESSAGE NLS missing message: NewServletTestCaseWizard_ErrorTitleCreateOfElementFailed in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.962
+!MESSAGE NLS missing message: NewServletTestCaseWizard_ErrorMessageSeeErrorLog in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.962
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WarningMessageSelectAWebProject in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.972
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WarningTitleWebProjectRequired in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.972
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WarningMessageSuperclassIsEmpty in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.982
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WarningMessageSuperclassDoesNotExist in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.982
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WarningMessageSuperclassIsInterface in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.992
+!MESSAGE NLS missing message: NewServletTestCaseWizard_WarningMessageSuperclassNotServletTestCase in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:26.992
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_ErrorMessageCouldntInstallLibraries in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:27.002
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_ErrorMessageCactusBundleNotFound in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:27.002
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_ErrorMessageDestDirNotFound in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:27.012
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_ErrorMessageInstallationOfLibsFailed in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:27.012
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_ErrorMessageInstallDirNotFound in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:27.022
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_AdditionalInfoAddCactusLibraries in: org.eclipse.jst.server.ui.internal.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2010-11-07 22:10:27.022
+!MESSAGE NLS missing message: CactusAddLibrariesProposal_DisplayStringAddCactusLibs in: org.eclipse.jst.server.ui.internal.Messages

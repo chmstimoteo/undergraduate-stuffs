@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/7/trunk/src/jsf/fuzzysystem/membershipfuction
+END
+TriangularMembershipFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/9/trunk/src/jsf/fuzzysystem/membershipfuction/TriangularMembershipFunction.java
+END
+DiscreteDomainPertinenceFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/9/trunk/src/jsf/fuzzysystem/membershipfuction/DiscreteDomainPertinenceFunction.java
+END
+ContinuousDomainMembershipFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/9/trunk/src/jsf/fuzzysystem/membershipfuction/ContinuousDomainMembershipFunction.java
+END
+MembershipFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/9/trunk/src/jsf/fuzzysystem/membershipfuction/MembershipFunction.java
+END
+TrapezoidalMembershipFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/9/trunk/src/jsf/fuzzysystem/membershipfuction/TrapezoidalMembershipFunction.java
+END
