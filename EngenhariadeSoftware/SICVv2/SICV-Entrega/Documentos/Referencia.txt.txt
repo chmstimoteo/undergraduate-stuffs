@@ -1,0 +1,22 @@
+-----------------------------------------------------------------------------------------------
+Data:18 de Abril de 2008
+SICV - Sistema Integrado de Controle de Viaturas
+Universidade de Pernambuco(UPE) - Recife - PE - Brasil
+Desenvolvimento:
+	a. Carlos Henrique Maciel Sobral Timoteo 
+	b. Diego Albuquerque de Araújo 
+	c. Elliackin Messias do Nascimento Figueiredo 
+	d. Rafael Praxedes Gomes
+Estudantes de Graduação - Engenharia da Computação
+5º período
+Disciplina: Engenharia de Software
+Professor: Fernando Castor
+-----------------------------------------------------------------------------------------------
+------------------------| REFERENCIA.TXT |---------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+Livros de Referncia:
+	
+	* UML Reference Manual
+	* Software Architecture in Practice
+	* Documenting Software Architectures views and beyond

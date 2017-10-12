@@ -1,0 +1,52 @@
+=== Run information ===
+
+Scheme:       weka.associations.Apriori -N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1
+Relation:     adult-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst-last
+Instances:    32561
+Attributes:   15
+              age
+              workclass
+              fnlwgt
+              education
+              education-num
+              marital-status
+              occupation
+              relationship
+              race
+              sex
+              capital-gain
+              capital-loss
+              hours-per-week
+              native-country
+              class
+=== Associator model (full training set) ===
+
+
+Apriori
+=======
+
+Minimum support: 0.7 (22793 instances)
+Minimum metric <confidence>: 0.9
+Number of cycles performed: 6
+
+Generated sets of large itemsets:
+
+Size of set of large itemsets L(1): 5
+
+Size of set of large itemsets L(2): 8
+
+Size of set of large itemsets L(3): 5
+
+Best rules found:
+
+ 1. class=<=50K 24720 ==> capital-loss=0 23974    conf:(0.97)
+ 2. capital-gain=0 class=<=50K 23685 ==> capital-loss=0 22939    conf:(0.97)
+ 3. class=<=50K 24720 ==> capital-gain=0 23685    conf:(0.96)
+ 4. capital-loss=0 class=<=50K 23974 ==> capital-gain=0 22939    conf:(0.96)
+ 5. native-country=United-States 29170 ==> capital-loss=0 27791    conf:(0.95)
+ 6. race=White 27816 ==> capital-loss=0 26470    conf:(0.95)
+ 7. race=White native-country=United-States 25621 ==> capital-loss=0 24349    conf:(0.95)
+ 8. capital-gain=0 29849 ==> capital-loss=0 28330    conf:(0.95)
+ 9. capital-gain=0 native-country=United-States 26699 ==> capital-loss=0 25320    conf:(0.95)
+10. race=White capital-gain=0 25407 ==> capital-loss=0 24061    conf:(0.95)
+

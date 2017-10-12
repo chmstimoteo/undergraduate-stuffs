@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Google Maps JavaScript API Example: Asynchronous Data Retrieval</title>
+  </head>
+
+  <body onunload="GUnload()">
+    
+    <TABLE border=4><TR><TD><div id="map" style="width: 500px; height: 300px"></div></TR><TR width="100" height="50"> <div id="distance" width ="100" height="100"></div></TR></TD></TABLE>
+    
+    <br></br><br></br><br></br>
+    <a href="http://chmstimoteo.googlepages.com/sicvsystem">Back</a>
+
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAc8xsFtTj7dh8Z-r4ceb_-hSeLteC2Bpc5rUtHmlfN6YYE4E7LBTS7hlzQs5cNQAqoUS9-AGi9GgTcg"
+            type="text/javascript"></script>
+ 
+    <script type="text/javascript">
+    //<![CDATA[
+    if (GBrowserIsCompatible()) {
+ 
+      var map = new GMap2(document.getElementById("map"));
+      map.setCenter(new GLatLng(-8.123, -35.0),13)
+      map.addControl(new GLargeMapControl());
+      map.addControl(new GMapTypeControl());
+      // == use different GDirections for adding and dragging, it is just simpler that way ==
+      var dirn1 = new GDirections();
+      var dirn2 = new GDirections();
+      var dirn3 = new GDirections();
+
+      var firstpoint = true;
+      var gmarkers = [];
+      var gpolys = [];
+      var lastindex = 0;
+
+
+      
+	// Download the data in data.xml and load it on the map. The format we
+        // expect is:
+        // <markers>
+        //   <marker -8.123,-35.0/>
+        //   <marker -8.0,-35.0/>
+        // </markers>
+        GDownloadUrl("http://chmstimoteo.googlepages.com/data.xml", function(data) {
+          var xml = GXml.parse(data);
+          var markers = xml.documentElement.getElementsByTagName("marker");
+          for (var i = 0; i < markers.length; i++) {
+            var latlng = new GLatLng(parseFloat(markers[i].getAttribute("lat")),
+                                    parseFloat(markers[i].getAttribute("lng")));
+            map.addOverlay(new GMarker(latlng));
+          }
+        });
+
+
+
+
+
+	
+	
+        //Function to plot to dinamic points and to take the distance.
+	GEvent.addListener(map, "click", function(overlay,point) {
+        // == When the user clicks on a the map, get directiobns from that point to itself ==
+        if (!overlay) {
+          if (firstpoint) {
+            dirn1.loadFromWaypoints([point.toUrlValue(6),point.toUrlValue(6)],{getPolyline:true});
+          } else {
+            dirn1.loadFromWaypoints([gmarkers[gmarkers.length-1].getPoint(),point.toUrlValue(6)],{getPolyline:true});
+	    map.removeListener("click");
+          }
+        }
+      });
+
+      function calculateDistance() {
+        var dist = 0;
+        for (var i=0; i<gpolys.length; i++) {
+          dist+=gpolys[i].Distance();
+        }
+        document.getElementById("distance").innerHTML="Path length: "+(dist/1000).toFixed(2)+" km. ";
+      }
+
+      // == when the load event completes, plot the point on the street ==
+      GEvent.addListener(dirn1,"load", function() {
+        // snap to last vertex in the polyline
+        var n = dirn1.getPolyline().getVertexCount();
+        var p=dirn1.getPolyline().getVertex(n-1);
+        var marker=new GMarker(p,{draggable:true});
+        GEvent.addListener(marker, "dragend", function() {
+          lastIndex = marker.MyIndex;
+          var point = marker.getPoint();
+          if (lastIndex>0) {
+            // recalculate the polyline preceding this point
+            dirn2.loadFromWaypoints([gmarkers[lastIndex-1].getPoint(),point.toUrlValue(6)],{getPolyline:true});
+          }
+          if (lastIndex<gmarkers.length-1) {
+            // recalculate the polyline following this point
+            dirn3.loadFromWaypoints([point.toUrlValue(6),gmarkers[lastIndex+1].getPoint()],{getPolyline:true});
+          }
+        });
+        map.addOverlay(marker);
+        // store the details
+        marker.MyIndex=gmarkers.length;
+        gmarkers.push(marker);
+        if (!firstpoint) {
+	  gpolys.clear();
+	  map.clearOverlays();
+          map.addOverlay(dirn1.getPolyline());
+          gpolys.push(dirn1.getPolyline());
+          calculateDistance();
+          secondpoint = true;
+        }
+        firstpoint = false;
+        if (gmarkers.length>1 && gmarkers.length<26) {
+          document.getElementById("link").style.display="";
+        } else {
+          document.getElementById("link").style.display="none";
+        }
+      });
+
+      // == move the polyline preceding this point ==
+      GEvent.addListener(dirn2,"load", function() {
+        // snap to last vertex in the polyline
+        var n = dirn2.getPolyline().getVertexCount();
+        var p=dirn2.getPolyline().getVertex(n-1);
+        gmarkers[lastIndex].setPoint(p);
+        // remove the old polyline
+        map.removeOverlay(gpolys[lastIndex-1]);
+        // add the new polyline
+        map.addOverlay(dirn2.getPolyline());
+        gpolys[lastIndex-1] = (dirn2.getPolyline());
+        calculateDistance();
+      });
+
+      // == move the polyline following this point ==
+      GEvent.addListener(dirn3,"load", function() {
+        // snap to first vertex in the polyline
+        var p=dirn3.getPolyline().getVertex(0);
+        gmarkers[lastIndex].setPoint(p);
+        // remove the old polyline
+        map.removeOverlay(gpolys[lastIndex]);
+        // add the new polyline
+        map.addOverlay(dirn3.getPolyline());
+        gpolys[lastIndex] = (dirn3.getPolyline());
+        calculateDistance();
+      });
+
+      GEvent.addListener(dirn1,"error", function() {
+        GLog.write("Failed: "+dirn1.getStatus().code);
+      });
+      GEvent.addListener(dirn2,"error", function() {
+        GLog.write("Failed: "+dirn2.getStatus().code);
+      });
+      GEvent.addListener(dirn3,"error", function() {
+        GLog.write("Failed: "+dirn3.getStatus().code);
+      });
+
+
+    }
+    else {
+      alert("Sorry, the Google Maps API is not compatible with this browser");
+    }
+    //]]>
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,42 @@
+<%@ taglib uri="/WEB-INF/lib/mentawai.jar" prefix="mtw"%>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+     <title>Teste logoff </title>
+ <mtw:ajaxConfig />
+ <script>
+ var reloaded = false;
+ function verify(event) {
+ 	// CTRL + F4 ou ALT + F4
+ 	if((event.ctrlKey || event.altKey) && event.keyCode == 115) return reloaded = false;
+ 
+ 	// F5 e CTRL + R
+ 	if(event.keyCode == 116 || (event.altKey && event.keyCode == 82)) return reloaded = true;
+ }
+ 
+ function closeWindow() {
+ 	if(!reloaded) {
+ 	 	var req = new mtw.request();
+ 	 	req.setUrl("<mtw:contextPath/>/Logout.do");
+ 	 	req.onSuccess(true);
+ 	 	req.send();
+ 	}
+ 	
+ }
+ //
+ // Event listeners
+ //
+ if(document.addEventListener) {
+ 	reloaded = true;
+ 	Event.observe(document, 'mousemove', function(){reloaded=false;}, false);		
+ }
+ Event.observe(document, 'keydown', verify, false);
+ Event.observe(window, 'beforeunload', closeWindow, false);	
+ </script>
+ </head>
+ <body>
+ Clique para fechar o browser, ou ALT+F4, CTRL+F4, se vc estiver utilizando o LISTENER 
+ repare que será informado que o usuário X efetuou o logoff corretamente.
+ </body>
+ </html>

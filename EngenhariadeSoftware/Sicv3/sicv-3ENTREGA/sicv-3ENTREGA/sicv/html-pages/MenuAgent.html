@@ -1,0 +1,182 @@
+<html>
+<head>
+<title>Forwarding Agent Menu</title>
+
+<script type="text/javascript">
+	var xmlhttp;
+
+	var numOccurrences;
+	var occurrencesId = [];
+	var occurrences = [];
+	
+	
+	function Occurrence(id,lat,lng,status,priority)
+	{
+		this.id = id;
+		this.lat = lat;
+		this.lng = lng;
+		this.status = status;
+		this.priority = priority;
+	}
+
+	function loadXMLDoc(url,operation,numero)
+	{
+	
+		xmlhttp=null;
+		
+		if (window.XMLHttpRequest)
+  		{// code for all new browsers
+  			xmlhttp = new XMLHttpRequest();
+  		}else if (window.ActiveXObject)
+  		{// code for IE5 and IE6
+ 			 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  		}
+
+		if (xmlhttp != null)
+	  	{
+	  		if(operation == "GetOccurrencesByAgent"){
+	  		
+	  			xmlhttp.onreadystatechange = getOccurrencesIDByAgent;
+	  			xmlhttp.open("GET",url+operation,true);
+	  			
+	  		}else if(operation == "GetOccurrenceById"){
+	  			
+	  			if(numero == "1"){
+	  				xmlhttp.onreadystatechange = getOccurrence1;
+	  			}else if(numero == "2"){
+	  				xmlhttp.onreadystatechange = getOccurrence2;
+	  			}else if(numero == "3"){
+	  				xmlhttp.onreadystatechange = getOccurrence3;
+	  			}
+	  			//alert(url+operation+"&id="+numero);	
+	  			xmlhttp.open("GET",url+operation+"&id="+numero,true);
+	  		}
+	  		
+	  		
+	  		xmlhttp.send(null);
+	  	}else
+	  	{
+	  		alert("Your browser does not support XMLHTTP.");
+	  	}
+	}
+
+	function getOccurrencesIDByAgent()
+	{
+		if (xmlhttp.readyState==4)
+		{// 4 = "loaded"
+		  if (xmlhttp.status==200)
+		    {// 200 = OK
+		    // ...our code here...
+		   	    var text = "";
+		  		var tokens  = xmlhttp.responseText.split(":");
+		  		numOccurrences = tokens.length-1;
+			    
+			    for(var i =1; i <= numOccurrences ; i++){
+			    	occurrencesId[i-1] = tokens[i];
+						text += "<input type='button' value='Occurrence[id=" + tokens[i] + "]' onclick='loadXMLDoc(\"http://localhost:8080/sicv/sicvservlet?operation=\",\"GetOccurrenceById\",\"" + i + "\");'><br>";
+							
+				}
+				
+				document.getElementById("occurrences").innerHTML = text;
+				
+		    }else {
+		    	alert("Problem retrieving XML data");
+		    }
+		}
+	}
+	
+	function getOccurrence1(){
+		if (xmlhttp.readyState==4)
+		{// 4 = "loaded"
+		  if (xmlhttp.status==200)
+		    {// 200 = OK
+		    // ...our code here...
+		   	    var text = "";
+		  		var tokens  = xmlhttp.responseText.split(":");
+		  			
+		  		lat = tokens[0];
+		  		lng = tokens[1];
+		  		priority = tokens[2];
+		  		status = tokens[3];
+		  				  				
+		  		occurrences[0] = new  Occurrence(occurrencesId[0],lat,lng,status,priority);		
+		  		document.getElementById("occurrence1").innerHTML = "lat = " + lat + "lng = "+ lng;		
+		    }else {
+		    	alert("Problem retrieving XML data");
+		    }
+		}
+	}
+	
+	function getOccurrence2(){
+		if (xmlhttp.readyState==4)
+		{// 4 = "loaded"
+		  if (xmlhttp.status==200)
+		    {// 200 = OK
+		    // ...our code here...
+		   	    var text = "";
+		  		var tokens  = xmlhttp.responseText.split(":");
+		  			
+		  		lat = tokens[0];
+		  		lng = tokens[1];
+		  		priority = tokens[2];
+		  		status = tokens[3];
+		  				  				
+		  		occurrences[1] = new  Occurrence(occurrencesId[1],lat,lng,status,priority);		
+		  		document.getElementById("occurrence2").innerHTML = "lat = " + lat + "lng = "+ lng;		
+		    }else {
+		    	alert("Problem retrieving XML data");
+		    }
+		}
+	}
+	
+	function getOccurrence3(){
+		if (xmlhttp.readyState==4)
+		{// 4 = "loaded"
+		  if (xmlhttp.status==200)
+		    {// 200 = OK
+		    // ...our code here...
+		   	    var text = "";
+		  		var tokens  = xmlhttp.responseText.split(":");
+		  			
+		  		lat = tokens[0];
+		  		lng = tokens[1];
+		  		priority = tokens[2];
+		  		status = tokens[3];
+		  				  				
+		  		occurrences[2] = new  Occurrence(occurrencesId[2],lat,lng,status,priority);	
+		  		document.getElementById("occurrence3").innerHTML = "lat = " + lat + "lng = "+ lng;		
+		    }else {
+		    	alert("Problem retrieving XML data");
+		    }
+		}
+	}
+</script>
+<script type="text/javascript">
+	
+	function load(){
+		
+				loadXMLDoc("http://localhost:8080/sicv/sicvservlet?operation=","GetOccurrencesByAgent");
+			
+	}
+</script>
+</head>
+<body onload="load();">
+<h1>Fowarding Agent Module</h1>
+
+<div id="occurrences" style="width: 300;height: 100"></div>
+	
+	<div id="occurrence1" style="width: 500;height: 500">
+		<div id="map1" style="width: 300;height: 300></div>
+	</div>
+	
+	<div id="occurrence2" style="width: 300;height: 100">
+		<div id="map2" style="width: 300;height: 300></div>
+	</div>
+	
+	<div id="occurrence3" style="width: 300;height: 100">
+		<div id="map3" style="width: 300;height: 300>
+	</div>
+</div>
+
+</body>
+</html>

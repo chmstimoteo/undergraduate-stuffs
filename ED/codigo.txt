@@ -1,0 +1,354 @@
+Prova ED:
+
+public void preordem(TreeNode no){
+	if(no==null)
+		return ;
+
+	print(no);
+	preordem(no.getLeft());
+	preordem(no.getRight());
+
+}
+
+
+public void emordem(TreeNode no){
+	if(no==null)
+		return ;
+
+	emordem(no.getLeft());
+	print(no);
+	emordem(no.getRight());
+
+}
+
+
+public void posordem(TreeNode no){
+	if(no==null)
+		return ;
+
+	posordem(no.getLeft());
+	posordem(no.getRight());
+	print(no);
+
+}
+
+
+public int resultadoposordem(String express,Pilha pilha){
+	if(express==null){
+		return pilha.dequeue();
+	}
+
+	if(express[0]==Integer){
+		pilha.enqueue(express[0]);
+		resultadopreordem(express[1 a fim],pilha);
+	}
+	if(express[0]=='+','-','*','/'){
+		opera(pilha,express[0]);//pega dois valores da pilha soma e adiciona a soma.
+		resultadopreordem(express[1 a fim],pilha);
+	}	
+
+}
+
+
+public int resultadoemordem(String express){
+	if(express==null){
+		return pilha.dequeue();
+	}
+	
+	if(express[0]=='(',')'){
+		resultadopreordem(express[1 a fim],pilha);
+	}
+	if(express[0]==Integer){
+		pilha.enqueue(express[0]);
+		resultadopreordem(express[1 a fim],pilha);
+	}
+	if(express[0]=='+','-','*','/'){
+		resultadopreordem(express[1 a fim],pilha);
+		opera(pilha,express[0]);//pega dois valores da pilha soma e adiciona a soma.
+		resultadopreordem(express[1 a fim],pilha);
+	}
+
+}
+
+
+public int resultadopreordem(String express){
+	if(express==null){
+		return pilha.dequeue();
+	}
+
+	if(express[0]==Integer){
+		pilha.enqueue(express[0]);
+		resultadopreordem(express[1 a fim],pilha);
+	}
+	if(express[0]=='+','-','*','/'){
+		resultadopreordem(express[1 a fim],pilha);
+		resultadopreordem(express[2 a fim],pilha);
+		opera(pilha,express[0]);//pega dois valores da pilha soma e adiciona a soma.
+	}
+
+}
+
+
+public TreeNode arvoreposfixa(String express,Pilha pilha){
+	int i;
+	for(i=0;i<express.lenght;i++){
+		if(express[i]=='+','-','*','/'){
+			Treenode num1 = pilha.pop();
+			Treenode num2 = pilha.pop();
+			Treenode arvore = new TreeNode(express[i],num1.num2);
+			pilha.push(arvore); 
+		}
+		if(express[i]==Integer){
+			pilha.push(new TreeNode(express[i]));
+		}
+	}
+	return pilha.pop();
+
+}
+
+
+Tabela hash:
+
+Object[] tabela;
+
+public int increment(int i){
+	i++;
+	while(tabela[i]!=null){
+		i++;
+	}
+	return i;
+}
+
+public int decrement(int i, Object busca){
+	i--;
+	while(!tabela[i].equals(busca)){
+		i--;
+	}
+	return i;	
+}
+
+public void rehashing(){
+	int tam = tabela.lenght * 2;
+	Object[] newtabela = new Object[tam];
+	for(int i=0;i<tabela.lenght;i++){
+		if(tabela[i]!=null && tabela[i]!= boolean)
+			insertion(newtabela,tabela[i],i);
+	}
+	tabela = newtabela;
+}
+
+
+
+Grafos:
+
+Vertex vetice; \\tem uma lista de adjacentes.
+
+public void dijkstra(Vertex vertice){
+	vertice.dist=0;
+	for(int i=1;i<=NUMVERTICES;i++){
+		if(vertice.adj=null)
+			vertice.adj.dist= infinity;
+		}
+	Fila fila;
+	fila.enqueue(vertice);
+	while(!fila.isEmpty()){
+		Vertex vert = fila.dequeue();
+		while(vert.adjacent!=null){
+			Vextex adj = vert.getadjacent();
+				if(DIST(vert,adj)+vert.dist < adj.dist)
+				adj.dist = DIST(vert,adj); && adj.path= adj.path + vert; 
+			if(adj.known==false)
+			fila.enqueue(adj);
+			adj.known==true;
+		}	
+	}
+
+
+}
+
+public char[] menorcaminho(Vertex a,Vertex b){
+dijkstra(a);
+return find(b).path;
+}
+
+
+Busca Binaria:
+
+int[] array;
+
+public Int buscabinaria(int val,int ini,int fim){
+	int med = (ini+fim)/2;
+	if(val==med){
+		return val;
+	}
+	if(val>med){
+		buscabinaria(val,med+1,fim);
+	}
+	if(val<med){
+		buscabinaria(val,ini,med-1);
+	}
+	return null;
+	
+}
+
+
+insercao em arvore binaria:
+
+public Node insere(Comparable reg,Node position){
+	if(position==null){
+		position=new Node(reg,null,null);
+	}else{
+		if(reg.compareTo(position.getElement())<0)
+			position.setLeft(insere(reg,position.getLeft()));
+		if(reg.compareTo(position.getElement())>0)
+			position.setRight(insere(reg,position.getRight()));
+		else
+			Erro:ja existe.
+	}
+}
+
+
+public void rotacaoEsquerda(Node exroot){
+	Node dobradica,aux;
+	dobradica=exroot.getRight();
+	aux=dobradica.getLeft();
+	dobradica.setLeft(exroot);
+	exroot.setRight(aux);
+	root=dobradica;
+}
+
+
+public void rotacaoDuplaDireita(Node exroot){
+	Node left = exroot.getLeft();
+	rotacaoEsquerda(left);
+	rotacaoDireita(exroot);
+}
+
+
+public void rotacaoDuplaEsquerda(Node exroot){
+	Node right= exroot.getRight();
+	rotacaoDireita(right);
+	rotacaoEsquerda(exroot);
+}
+
+
+public void insereTrie(Object reg,Node position,Fila fila,Object rein){
+	if(position!=null){
+		rein= position;
+		position = new Node(null,aux.getRight(),aux.getLeft());
+	}
+	if(fila.isEmpty() || position==null){
+		position = new Node(reg);
+		insereTrie(rein,root,fila,null);
+	}else{
+		int vetor = fil.dequeue();
+		if(vetor==0){
+			insereTrie(reg,position.getLeft(),fila);
+		}
+		if(vetor==1){
+			insereTrie(reg,position.getRight(),fila);
+		}
+	}
+	
+}
+
+
+Arvore B:
+
+public Pagina{
+	
+	int num;
+	Comparable[] registros;
+	Pagina[] paginas;
+
+	public Pagina(int mm){
+		num=0;
+		registros=new Comparable[mm];//em ordem.
+		paginas =new Pagina[mm+1];//portanto, em ordem.
+	}
+}
+
+public Comparable pesquisa(Comparable reg,Pagina atual){
+	if(atual==null){
+		return null;
+	}else{
+		int indice=0;
+		while(indice<atual.num-1  &&  reg.compareTo(atual.registros[i])>0){
+			i++;
+		}
+		if(reg.compareTo(atual.registros[i])==0){
+			return atual.registros[i];
+		}else{
+			return pesquisa(reg,atual.paginas[i]);
+		}
+}
+}
+
+public Comparable[] inserir(Comparable reg,Pagina atual,Comparable[] retrie){
+	int indice=0;
+		while(indice<atual.num-1  &&  reg.compareTo(atual.registros[i])>0){
+			i++;
+		}
+	if(atual.paginas==null)
+		if(atual.num<atual.registros.lenght){
+		int index=0;
+		while(index<atual.num-1  &&  reg.compareTo(atual.registros[i])>0){
+			i++;
+		}
+		atual.registros[i+1] = atual.registros[i];
+		atual.registros[i] = reg;
+		return null;
+		}else{
+		Comparable[] retrie = new Comparable[atual.registros.lenght/2];
+		retrie[0] = atual.registros[0];
+		retrie[1] = atual.registros[1];
+		return retrie;  
+		}
+	else{
+		Comparable[] retrie= pesquisa(reg,atual.paginas[i]);
+		if(retrie!=null){
+			atual.paginas[i+1] = atual.registros[i];
+			atual.paginas[i] = new Pagina(atual.registros[0].lenght).insere(retrie);
+			
+}
+	} 
+}
+
+
+public Vertex buscaProfundidade(Vertex procura,Pilha pilha){
+	if(procura==pilha.getTop()){
+		return pilha.pop();
+	}
+	if(!pilha.isEmpty()){
+		Vertex atual=pilha.pop();
+		atual.known=true;
+		pilha.push(atual);
+		while(atual.adjacent()!=null && atual.adjacent.known==false){
+			pilha.push(atual.adjacent);
+			buscaProfundidade(procura,pilha);
+		}
+	pilha.pop(); 
+	return;
+	}
+	return null;//nao encontrou.
+	
+
+}
+
+
+public Vertex buscaLargura(Vertex procura,Fila fila){
+	if(procura==fila.getFirst()){
+		return fila.dequeue();
+	}
+	if(!fila.isEmpty()){
+		Vertex atual = fila.dequeue();
+		atual.known=true;
+		while(atual.adjacent!=null && atual.adjacent.known==false){
+			fila.enqueue(atual.adjacent);
+		}
+		buscalargura(procura,fila);
+	}
+	return null;//nao encontrou.
+
+} 
+

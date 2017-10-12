@@ -1,0 +1,63 @@
+<html>
+<head>
+</head>
+<body>
+<div id="controls" align="center">
+<br><br><h2>Sistema Integrado de Controle de Viaturas</h2>
+<div align="center" > <h3><i>SICV System</i></h3><br></div>
+<form onsubmit="login()" action= "http://chmstimoteo.googlepages.com/attendant.htm">
+	<table bgcolor="#00FFFF">
+		<tr>
+			<td>Username:</td>
+			<td><input id="username" onchange= "mudouestado()" type="text" value=""></td>
+			<td><div id="usernamewrong"></div></td>
+		</tr>
+		<tr>
+			<td>Password:</td>	
+			<td><input id="password" onchange="mudouestado()" type="text" value=""></td>
+			<td><div id="passwordwrong"></div></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td align="center" ><input id="button1" onclick="login()" type="button" value="Login"></td>
+		</tr>
+	</table>
+</form>
+</div>
+
+<script type="text/javascript">
+    	function login(){
+	    	var user = document.getElementById("username").value;
+        	var pass = document.getElementById("password").value;
+	    	if(checkcampos(user, pass)){
+		    	//var client = procurarBD(user, pass);    //return null se nao existe o registro ou retorna um Client se existe
+		    	//sessioncontrol(cliente.ipnum());
+	    	}
+    	}
+    	
+    	function checkcampos(username, password){
+    		
+        	if(username==""){
+        		document.getElementById("usernamewrong").innerHTML = "<FONT COLOR\=\"\#FF0000\"><i>Username em branco</i></FONT>";
+        		return false;
+    		}
+        	if(password==""){
+        		document.getElementById("passwordwrong").innerHTML = "<FONT COLOR\=\"\#FF0000\"><i>Password em branco</i></FONT>";
+        		return false;
+    		}
+    		return true;
+        	
+	    }
+    	
+    	function mudouestado(){
+	    	document.getElementById("usernamewrong").innerHTML = "";
+        	document.getElementById("passwordwrong").innerHTML = "";
+    	}
+    	
+    	function sessioncontrol(ipnum){
+	    		
+    	}   
+    	
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+//Criando o objeto XxlHTTPRequest
+if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+http_request = new XMLHttpRequest();
+http_request.overrideMimeType('text/xml');
+} else if (window.ActiveXObject) { // IE
+http_request = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+//que função JavaScript irá processar a resposta
+http_request.onreadystatechange = nameOfTheFunction;
+
+
+url = "Endereco da pagina"
+http_request.open('GET', url, true);
+//O parâmetro do método send() pode ser costituido por quaisquer dados que pretenda enviar ao servidor
+http_request.send(null);
+
+if (http_request.readyState == 4) {
+// everything is good, the response is received
+
+	if (http_request.status == 200) {
+	// perfect!
+	} else {
+	// there was a problem with the request,
+	// for example the response may be a 404 (Not Found)
+	// or 500 (Internal Server Error) response codes
+	}
+} else {
+// still not ready
+}

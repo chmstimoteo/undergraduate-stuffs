@@ -1,0 +1,9 @@
+
+
+-Deve ser especificada a arquitetura que está sendo desenvolvida.
+-Visão de módulos apresentando as principais classes do sistema
+e seus relacionamentos
+-Visão de Interação mostrando os principais cenários de funcionamento
+do sistema, em termos de seus componentes arquiteturais.
+-Uma visão de implementação, explicitando a alocação dos componentes
+arquiteturais do sistema a unidades de hardware.

@@ -1,0 +1,103 @@
+<script type="text/javascript"> 
+ <!--
+ 
+ //Código ajax do mentawai responsável por efetuar o logout antes de fechar o browser. 
+ //Para maiores esclarecimentos sobre esta função leia: FAQ: Ajax Fácil com Mentawai (MentaAjax)
+ function doRequest() {
+ var req = new mtw.request();
+ req.setUrl("/MinhaApp/Logout.do");
+ req.onSuccess(true);
+ req.send();
+  }
+ 
+ // Iniciamos setando uma variável que será responsável em dizer se a página está sendo
+ // recarregada ou não. Note que a variável inicia com valor false. Isto é muito importante.
+ var reloaded = false;
+ // Esta função verifica se está sendo dado algum comando através do teclado para
+ // recarregar a página (F5, CTRL + R). Ela retorna true ou false
+ function checkReload(evt) {
+ 	if(evt.keyCode == 116 || (evt.altKey && evt.keyCode == 82))
+ 	return true;
+ 	else
+ 	return false;
+ }
+ // Aqui nós verificamos quais as teclas o usuário está pressionando.
+ // Neste momento só nos interessa saber duas coisas: se o usuário está fechando o browser ou se
+ // ele está apenas recarregando. No nosso caso nós só queremos executar algo se o usuário sair
+ // indevidamente do sistema, então se ele recarregar a página nada deverá ser executado.
+ // Este é o ponto crucial do script.
+ // Se o usuário estiver tentando fechar o navegador (ALT + F4 ou CTRL + F4) a variável reloaded 
+ //será setada como false, ou seja, o usuário não está recarregando a página. Portanto nós podemos
+ // executar nossa função de LOGOUT. Agora se o usuário está tentando recarregar a página (F5,
+ // CTRL + R...) a variável será setada como true e nada irá acontecer.
+ function verify(evt) {
+ 	// CTRL + F4
+ 	if(evt.ctrlKey && evt.keyCode == 115) {
+ 		reloaded = false;
+ 	}
+ 	// ALT + F4
+ 	if(evt.altKey && evt.keyCode == 115) {
+ 		return reloaded = false;
+ 	}
+ 	// F5 e CTRL + R
+ 	if(checkReload(evt)) {
+ 		return reloaded = true;
+ 	}
+ }
+ // Esta função faz o trabalho crucial. Ela recebe uma variável: a browserFlag que indica qual
+ // navegador está sendo utilizado. Esta variável foi mantida apenas no caso de você querer fazer
+ // algo diferente para cada navegador. No caso nós chamamos a mesma função para todos os
+ // navegadores, então não seria necessária esta verificação. Mas fica aí como exemplo :)
+ // Ao chamar a função, esta mesma verifica qual o valor da variável global reloaded. Se esta for
+ // false (o navegador não está sendo recarregado) ela envia uma requisição ao servidor através
+ // de uma função ajax solicitando que a sessão seja derrubada. Se for true, nenhuma requisição
+ // é enviada e nada acontece. Lembrando que neste ponto você pode fazer oque quiser, basta
+ // mudar o código da função para incrementá-la.
+ function closeWindow(browserFlag) {
+ 	if(!reloaded) {
+ 		if(browserFlag == 'ie') {
+ 			doRequest();
+ 		} else { 
+ 			doRequest();
+ 		}
+ 	}
+ }
+ // Aqui é realmente a parte mais importante do código, pode-se dizer. Verificamos com um simples 
+ // "if" qual o browser está sendo utilizado. if(!document.addEventListener &&
+ //document.attachEvent) quer dizer se não existir o método addEventListener e existir o método
+ // attachEvent então estamos trabalhando com o IE ou algum browser que suporte este método
+ // e utilizaremos o attachEvent. Caso contrário, o browser não suporta o attachEvent mas
+ // suporta o addEventListener, então o utilizaremos.
+ // Lembrando que todos os browsers modernos e atuais suportarão ou um ou outro.
+ if(!document.addEventListener && document.attachEvent) {
+ 	// Aqui nós fazemos com que o evento keydown (que é disparado sempre que uma tecla for
+ // pressionada) seja ouvido pelo objeto document da árvore DOM. Então sempre que o
+ // usuário apertar algum botão na tela a função verify será chamada e será verificado
+ // o que ele está fazendo.
+ 	document.attachEvent("onkeydown", function(){verify(event)});
+ 	// Esta é realmente a chave do código. A função closeWindow é chamada apenas aqui.
+ 	// Nós adicionamos o evento beforeunload no objeto window. Sempre que este evento
+ 	// for disparado a função closeWindow será chamada e fará as verificações necessárias.
+ 	// Isto ocorrerá sempre antes de a página mudar, for recarregada, for fechada... seja
+ // através de algum botão do navegador, ou algum comando do teclado. Ou seja, seja lá
+ // o que for acontecer na janela esta função será chamada :)
+ 	window.attachEvent("onbeforeunload", function(){closeWindow('ie')});
+ 
+ } else {
+ 	// No FF em específico quando o evento beforeunload é disparado se a página não estiver
+ // totalmente carregada ele atropela tudo e dispara a função encerrando a função.
+ // Como alternativa, nós deixamos a variável setada inicialmente como true, oque
+ // não deixará a funão closeWindow enviar a requisição ao servidor. Essa variável
+ // somente irá passar para false quando a página for carregada, e quando o usuário mover 
+ // o mouse sobre a tela. Este é um contorno para um pequeno bug.
+ 	reloaded = true;
+ 	// Mesma coisa do IE
+ 	document.addEventListener('keydown',function(event){verify(event);},false);
+ 	window.addEventListener('beforeunload',function(event){closeWindow('ff');},false);
+ 	// Ao mover o mouse a variável reloaded receberá o valor padrão correto, false
+ 	document.addEventListener('mousemove',function(){reloaded=false;},false);
+ }
+ 
+ 
+ //-->
+ </script>

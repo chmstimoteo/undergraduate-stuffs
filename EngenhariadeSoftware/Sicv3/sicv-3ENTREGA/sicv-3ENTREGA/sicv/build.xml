@@ -1,0 +1,98 @@
+﻿<project default="clean" basedir="." name="antdemo">
+	
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="meta-inf.dir" value="${basedir}/META-INF"/>
+	
+	<property file="${basedir}/CONFIG.conf"/>
+	<property name="sicv" value="${path.tomcat}/webapps/sicv"/>
+	<property name="settings.dest" value="${sicv}/.settings"/>
+    <property name="web-inf.dest" value="${sicv}/WEB-INF"/>
+    <property name="classes.dest" value="${web-inf.dest}/classes"/>
+	<property name="meta-inf.dest" value="${classes.dest}/META-INF"/>
+	<property name="lib.dest" value="${web-inf.dest}/lib"/>
+	<property name="position.dest" value="${sicv}/html-pages/position"/>
+	
+	
+
+	<target name="init">
+		<echo> Criando diretórios </echo>
+		<mkdir dir="${build.dir}"/>
+		
+		<mkdir dir="${sicv}"/>
+		<mkdir dir="${settings.dest}"/>
+		<mkdir dir="${web-inf.dest}"/>
+		<mkdir dir="${meta-inf.dest}"/>
+		<mkdir dir="${classes.dest}"/>
+		<mkdir dir="${lib.dest}"/>
+		<mkdir dir="${position.dest}"/>
+	</target>
+		
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
+	</path>
+	
+	
+	<target name="compile" depends="init" description="Compila os arquivos-fonte">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath refid="project.classpath"/>			
+		</javac>
+	</target>
+
+	<target name="copy" depends="init,compile,test">
+			
+		<copy todir="${web-inf.dest}">
+					<fileset dir="${meta-inf.dir}">
+						<include name="**/web.xml"/>
+					</fileset>
+		</copy>
+		
+		<copy todir="${classes.dest}">
+				<fileset dir="${build.dir}">
+	    			<include name="**/*.class"/>
+				</fileset>
+				<fileset dir="${meta-inf.dir}">
+					    <include name="**/*.properties"/>
+					    <include name="**/*.log"/>
+				</fileset>
+		</copy>
+				
+		<copy todir="${meta-inf.dest}">
+							<fileset dir="${meta-inf.dir}">
+								<include name="**/persistence.xml"/>
+							</fileset>
+				</copy>
+				
+		
+		<copy todir="${lib.dest}">
+						<fileset dir="${lib.dir}">
+							<include name="**/*.jar"/>
+							<include name="**/*.zip"/>
+						</fileset>
+		</copy>
+			
+			
+		</target>
+
+
+
+	<target name="test" depends="compile">
+       	<junit printsummary="true" dir="${build.dir}" fork="true">
+           <formatter type="plain" usefile="false" />
+           <classpath refid="project.classpath" />
+       	   <test name="testes.AllTest.class" />
+           
+       </junit>
+
+</target>
+
+
+	<target name="clean" depends="copy">
+		<delete dir="${build.dir}"/>
+	</target>
+
+</project>

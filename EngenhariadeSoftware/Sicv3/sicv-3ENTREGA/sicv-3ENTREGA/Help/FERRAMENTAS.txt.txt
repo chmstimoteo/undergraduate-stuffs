@@ -1,0 +1,72 @@
+-----------------------------------------------------------------------------------------------
+Data:18 de Abril de 2008
+SICV - Sistema Integrado de Controle de Viaturas
+Universidade de Pernambuco(UPE) - Recife - PE - Brasil
+Desenvolvimento:
+	a. Carlos Henrique Maciel Sobral Timoteo 
+	b. Diego Albuquerque de Araújo 
+	c. Elliackin Messias do Nascimento Figueiredo 
+	d. Rafael Praxedes Gomes
+Estudantes de Graduação - Engenharia da Computação
+5º período
+Disciplina: Engenharia de Software
+Professor: Fernando Castor
+-----------------------------------------------------------------------------------------------
+------------------------| FERRAMENTAS.TXT |----------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+Lista de Ferramentas: 
+
+• Linguagens: 
+1 – Java 6.0
+2 – HTML
+3 – JavaScript
+4 – XML
+5 - UML
+
+• Servidores: 
+1 – Google Maps
+2 – Apache Tomcat 6.0.16  
+
+• Compiladores: 
+1 – javac (Java Compiler). 
+
+• Ambientes de Desenvolvimento: 
+1 – Eclipse (vs3.1 / vs3.2 / vsEuropa) 
+2 – NetBeans 6.0 
+3 – JUDE 3.0.2
+4 – Notepad++
+5 – Macromedia DreamWeaver 8
+6 – Crimsom Editor 
+
+• API’s: 
+1 – Google Maps JavaScript API
+2 – Java Runtime 6.0(JRE 6.0)   
+
+• Ferramentas de Apoio a escrita de documentos HTML(Firefox Add-ons): 
+1 – JSView
+2 – CodeView  
+3 – ViewSourceWith
+4 – Web Developer Add-on
+5 – ViewSource
+6 – FireBug
+7 – DOM Inspector 
+
+• Arcabouços de Testes: 
+1 – JUnit 4.8 at Netbeans 6.0. 
+2 – JUnit 3.8.1 at Eclipse. 
+
+• Ferramentas para produção de builds: 
+1 – Ant Builder. 
+
+• Ferramentas para o registro de histórias de usuário: 
+1 – MS Word.
+2 – XPlanner 
+
+• Ferramentas para dar suporte à escrita de histórias de usuários: 
+1 – MS Word. 
+2 – XPlanner. 
+
+• Ferramentas para a especificação/modelagem de sistemas de software (para a descrição da arquitetura do sistema): 
+1 – JUDE 3.0.2(Modelagem). 
+2 – MS Word(Especificação). 

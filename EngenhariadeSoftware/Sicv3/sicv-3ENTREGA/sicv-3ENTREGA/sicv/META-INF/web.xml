@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+
+   <servlet>
+	<servlet-name>SicvServlet</servlet-name>
+	<servlet-class>sicv.view.servlets.SicvServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>SicvServlet</servlet-name>
+	<url-pattern>/sicvservlet</url-pattern>
+  </servlet-mapping>
+  
+
+<!-- LOGIN -->
+  <servlet>
+    <servlet-name>SicvWebServer</servlet-name>
+    <servlet-class>sicv.view.servlets.SicvWebServer</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SicvWebServer</servlet-name>
+    <url-pattern>/sicvwebserver</url-pattern>
+  </servlet-mapping>
+  
+  
+
+
+</web-app>

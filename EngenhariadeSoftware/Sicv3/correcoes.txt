@@ -1,0 +1,10 @@
+Correções Projeto ES:
+
+	Arquitetura:
+		
+
+		-Sua visão de módulos ignora a necessidade de uma infra-estrutura de comunicação. Ela será necessária, porém!
+
+		
+
+		

@@ -1,0 +1,16 @@
+<?xml version="1.0"?> 
+<project name="sicv" default="compile" basedir="."> 
+
+     <property name="sicv" value="."/> 
+     <property name="build" value="build"/>
+
+     <target name="init">  
+          <mkdir dir="${build}"/>
+     </target>
+
+     <target name="compile" depends="init"> 
+          <!-- Compile the java code -->
+          
+          <javac srcdir="sicv" destdir="C:\Users\Usuario\Desktop\Ant"/> 
+     </target>
+</project>

@@ -1,0 +1,10 @@
+http://maps.google.com/mapfiles/ms/micons/bus.png
+http://maps.google.com/mapfiles/ms/micons/cabs.png
+http://maps.google.com/mapfiles/ms/micons/caution.png
+ http://maps.google.com/mapfiles/ms/micons/cycling.png
+http://maps.google.com/mapfiles/ms/micons/helicopter.png
+http://maps.google.com/mapfiles/ms/micons/horsebackriding.png
+http://maps.google.com/mapfiles/ms/micons/motorcycling.png
+http://maps.google.com/mapfiles/ms/micons/phone.png
+http://maps.google.com/mapfiles/ms/micons/tram.png
+http://maps.google.com/mapfiles/ms/micons/truck.png

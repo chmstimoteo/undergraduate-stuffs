@@ -1,0 +1,41 @@
+//Function to find the path between to points
+	var dirn = new GDirections();
+
+	var firstpoint = true;
+      	var gmarkers = [];
+      	var gpolys = [];
+      	var dist = 0;
+
+
+      	GEvent.addListener(map, "click", function(overlay,point) {
+	        // == When the user clicks on a the map, get directiobns from that point to itself ==
+        	if (!overlay) {
+          	if (firstpoint) {
+            		dirn.loadFromWaypoints([point.toUrlValue(6),point.toUrlValue(6)],{getPolyline:true});
+          	} else {
+          	  	dirn.loadFromWaypoints([gmarkers[gmarkers.length-1].getPoint(),point.toUrlValue(6)],{getPolyline:true});
+          	}
+        	}
+      	});
+
+      // == when the load event completes, plot the point on the street ==
+      GEvent.addListener(dirn,"load", function() {
+        // snap to last vertex in the polyline
+        var n = dirn.getPolyline().getVertexCount();
+        var p=dirn.getPolyline().getVertex(n-1);
+        var marker=new GMarker(p);
+        map.addOverlay(marker);
+        // store the details
+        gmarkers.push(marker);
+        if (!firstpoint) {
+          map.addOverlay(dirn.getPolyline());
+          gpolys.push(dirn.getPolyline());
+          dist += dirn.getPolyline().Distance();
+          document.getElementById("distance").innerHTML="Path length: "+(dist/1000).toFixed(2)+" km. "+(dist/1609.344).toFixed(2)+" miles.";
+        }
+        firstpoint = false;
+      });
+
+      GEvent.addListener(dirn,"error", function() {
+        GLog.write("Failed: "+dirn.getStatus().code);
+      });
