@@ -1,0 +1,26 @@
+guia
+
+
+- introducao
+	- O que sao redes opticas
+
+- Background
+	- Evolucao
+	- Estado da arte
+
+- Motivacao
+	- porque usar redes opticas?
+
+- Arquitetura das redes opticas
+	- tipos de redes opticas
+	- principais componentes
+	- tipos de multiplexacao
+		- WDM
+	-Roteamento
+- Comparacao
+	- RO x Redes sem fio
+
+- Conclusao
+
+- Obrigado!!
+	

@@ -1,0 +1,19 @@
+Trabalho 11/09/09
+
+cap.3
+
+análise Sintática
+
+	- introdução
+	- gramáticas
+	- árvore de derivação
+	- ambiguidade
+	- analisador sintático tipo
+		shift/reduce
+		--> conflitos shit/reduce
+		--> conflitos reduce/reduce
+	- gerador de analisador sintatico yacc
+		--> analisador tipo LALR
+		--> estrutura
+		--> comunicação com o lex
+		--> recuperação de erros

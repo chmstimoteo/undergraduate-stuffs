@@ -1,0 +1,49 @@
+Aula de Redes de Computadores 1:
+
+*Estudar 1 e 2 aula.
+
+Acesso de Rede: Rede Virtual ou de Hardware nos pontos finais vindo dos provedores.
+ADSL, DIAl-UP e ISDN(extinta).
+
+
+CAMADAS:
+
+1 APLICACAO: Telnet,webmail, ftp...
+2 TRANSPORTE: Transporta os dados de um ponto a outro (PPP)
+3 REDE: O caminho para se chegar.
+4 ENLACE: Quadros(Pacotes) nos fios e passando pelos comutadores de
+	  pacote e de enlace.
+5 FISICA: Os bits no enlace.
+
+MEIOS:
+Meios Fisicos Guiados: Sinal em meios fisicos ja direcionados.
+Meios Fisicos Nao-Guiados: Sinal se propaga livremente. Ex.: radio,
+			   micro-ondas(um pouco orientados - antena
+			   /receptor).
+
+Meios Fisicos de trasporte:
+-CAbo
+-Fibra
+-Radio, walelan, microwave, satellite...
+
+
+Comutadores podem ser de:
+Rede = Roteadores.
+Enlace = Switch (diz para onde vai)
+Fisicos = repetidores, HUB(envia para todo mundo e reforca os pacotes)
+
+Traceroute: www.traceroute.org
+
+
+Atraso e redes comutadas por pacotes:
+
+- Processamento: verificacao de bits e identificacao do cabecalho.
+- Enfileiramento: O comutador nao funciona em paralelo, por isso tem q esperar
+outras acoes serem feitas para liberar o enlace.
+- Transmissao: 
+			                           l/r    l/r    l/r      ToTAl: 3L/R
+	DAdo: L  Taxa Transmissao: R		PF------CM-----CM-----PF
+
+- Atraso de propagacao:
+	Atraso provocado pelo meio que ele esta sendo transportado.
+
